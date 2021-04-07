@@ -40,5 +40,15 @@ namespace SportsStore.Models
             return products.AsQueryable<Product>();
 
         }
+
+        public Product GetProductById(int productID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IQueryable<Product> GetProductsByKeyword(string keyword)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

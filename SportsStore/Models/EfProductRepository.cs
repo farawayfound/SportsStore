@@ -18,9 +18,36 @@ namespace SportsStore.Models
         }
 
         // M e t h o d s
+
+
+        //  C r e a t e
+
+
+        //  R e a d
         public IQueryable<Product> GetAllProducts()
         {
             return _context.Products;
         }
+
+        public Product GetProductById(int productId)
+        {
+            /*Product p = _context.Products
+                                .Where(p => p.ProductId == productId)
+                                .FirstOrDefault();*/
+            Product p = _context.Products.Find(productId);
+            return p;
+        }
+
+        public IQueryable<Product> GetProductsByKeyword(string keyword)
+        {
+            IQueryable<Product> products = _context.Products
+                                                   .Where(p => p.Name.Contains(keyword));
+            return products;
+        }
+
+        //  U p d a t e
+
+
+        //  D e l e t e
     }
 }
