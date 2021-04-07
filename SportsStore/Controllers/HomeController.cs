@@ -48,6 +48,9 @@ namespace SportsStore.Controllers
         public IActionResult Search(string keyword)
         {
             IQueryable<Product> productSearch = _repository.GetProductsByKeyword(keyword);
+
+            ViewBag.Keyword = keyword; //you can call @ViewBag in the HTML
+
             return View(productSearch);
         }
     }

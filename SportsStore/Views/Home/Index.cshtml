@@ -6,8 +6,8 @@
 
 @foreach (Product p in Model)
 {
-    <h3>@p.Name</h3>
-    @p.Description
+    <h3><a asp-controller="Home" asp-action="Details" asp-route-id="@p.ProductId"> @p.Name </a></h3>
     <h4> @p.Price.ToString("c") </h4>
+    //<a href="/Home/Details/?id=@p.ProductId"> Details </a>
     <hr />
 }

@@ -54,6 +54,7 @@ namespace SportsStore
                 //     await context.Response.WriteAsync("Hello World!");
                 // });
                 endpoints.MapDefaultControllerRoute();
+                // <controller>=Home/<action>=Index/<int? id>
             });
         }
     }
