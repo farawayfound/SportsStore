@@ -27,12 +27,28 @@ namespace SportsStore.Controllers
             //return View(allProducts);
 
         public IActionResult Index(int productPage = 1)
-        {
+        {   //Use home/index/?productPage=2 to display page 2
             IQueryable<Product> allProducts = _repository.GetAllProducts();
             IQueryable<Product> someProducts = allProducts.OrderBy(p => p.ProductId)
                                                           .Skip((productPage - 1) * _pageSize)
                                                           .Take(_pageSize);
             return View(someProducts);                                              
+        }
+
+        public IActionResult Details(int id = 1)
+        {   //use /home/details/?id=2 to display id 2
+            Product p = _repository.GetProductById(id);
+            if (p != null)
+            {
+                return View(p);
+            }
+            return RedirectToAction("index");
+        }
+
+        public IActionResult Search(string keyword)
+        {
+            IQueryable<Product> productSearch = _repository.GetProductsByKeyword(keyword);
+            return View(productSearch);
         }
     }
 }
