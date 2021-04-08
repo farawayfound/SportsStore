@@ -1,7 +1,6 @@
 ﻿@model Product
 
-<form method="post">
-    <input type="hidden" asp-for="ProductId" />
+<form asp-action="Add" method="post">
     <table>
         <tr>
             <th> Name: </th>
@@ -20,8 +19,8 @@
             <td> <input asp-for="Category" /> </td>
         </tr>
         <tr>
-            <th><input type="submit" value="Update" /></th>
-            <td> <a asp-action="Details" asp-route-Id="@Model.ProductId">Cancel</a> </td>
+            <th></th>
+            <td> <input type="submit" value="Add Product" /> </td>
         </tr>
     </table>
 </form>

@@ -64,6 +64,20 @@ namespace SportsStore.Controllers
         // U p d a t e
 
         [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Add(Product p)
+        {
+            _repository.Create(p);
+            return RedirectToAction("Index");
+
+        }
+
+        [HttpGet]
         public IActionResult Update(int id)
         {
             Product p = _repository.GetProductById(id);
@@ -78,7 +92,7 @@ namespace SportsStore.Controllers
         public IActionResult Update(Product p)
         {
             Product updatedProduct = _repository.UpdateProduct(p);
-            return RedirectToAction("Index");
+            return RedirectToAction("Details",new { id = p.ProductId });
         }
     }
 }

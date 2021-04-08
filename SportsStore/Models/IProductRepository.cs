@@ -6,6 +6,9 @@ namespace SportsStore.Models
     public interface IProductRepository
     {
         // C r e a t e
+        public Product Create(Product p);
+
+        // R e a d
         public IQueryable<Product> GetAllProducts();
 
         public Product GetProductById(int productID);
@@ -19,5 +22,6 @@ namespace SportsStore.Models
         public Product UpdateProduct(Product p);
 
         // D e l e t e
+        public bool Delete(int id);
     }
 }

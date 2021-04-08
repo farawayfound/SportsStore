@@ -22,6 +22,12 @@ namespace SportsStore.Models
 
 
         //  C r e a t e
+        public Product Create(Product p)
+        {
+            _context.Products.Add(p);
+            _context.SaveChanges();
+            return p;
+        }
 
 
         //  R e a d
@@ -72,5 +78,16 @@ namespace SportsStore.Models
         }
 
         //  D e l e t e
+        public bool Delete(int id)
+        {
+            Product productToDelete = GetProductById(id); //Calling another method in the same class
+            if (productToDelete == null)
+            {
+                return false;
+            }
+            _context.Products.Remove(productToDelete);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }

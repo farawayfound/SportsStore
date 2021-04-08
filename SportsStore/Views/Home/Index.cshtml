@@ -1,7 +1,7 @@
 ﻿@model IQueryable<Product>
 
 <h4> Welcome to SportsStore </h4>
-
+<a asp-action="Add"> Add New Product </a>
 <hr />
 
 @foreach (Product p in Model)
@@ -11,3 +11,7 @@
     //<a href="/Home/Details/?id=@p.ProductId"> Details </a>
     <hr />
 }
+
+<a> Last Page</a>
+
+<a> Next Page </a>
