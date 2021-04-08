@@ -20,11 +20,18 @@ namespace SportsStore.Controllers
         // M e t h o d s
         //public IActionResult Index() 
         //    => View(_repository.GetAllProducts());
-        
-            //// 1. Go to database and get data out.
-            //IQueryable<Product> allProducts = _repository.GetAllProducts();
-            //// 2. Send that data to the view
-            //return View(allProducts);
+
+        //// 1. Go to database and get data out.
+        //IQueryable<Product> allProducts = _repository.GetAllProducts();
+        //// 2. Send that data to the view
+        //return View(allProducts);
+        public IActionResult Categories()
+        {
+            IQueryable<string> categories = _repository.GetAllCategories();
+            IQueryable<string> lCategories = categories.OrderBy(s => s.Length)
+                                                           .ThenBy(s => s);
+            return View(lCategories);
+        }
 
         public IActionResult Index(int productPage = 1)
         {   //Use home/index/?productPage=2 to display page 2
@@ -52,6 +59,26 @@ namespace SportsStore.Controllers
             ViewBag.Keyword = keyword; //you can call @ViewBag in the HTML
 
             return View(productSearch);
+        }
+
+        // U p d a t e
+
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            Product p = _repository.GetProductById(id);
+            if (p!= null)
+            {
+                return View(p);
+            }
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Update(Product p)
+        {
+            Product updatedProduct = _repository.UpdateProduct(p);
+            return RedirectToAction("Index");
         }
     }
 }

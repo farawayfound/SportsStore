@@ -5,3 +5,5 @@
 <h4> @Model.Price.ToString("c") </h4>
 <h4> Category: @Model.Category </h4>
 <hr/>
+
+<button><a asp-controller="Home" asp-action="Update" asp-route-id="@Model.ProductId">Edit</a></button>
