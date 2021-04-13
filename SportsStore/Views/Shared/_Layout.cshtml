@@ -6,12 +6,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title> SportsStore </title>
+    <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
 
 <body>
-    <div>
-        @RenderBody()
+    <div class="bg-dark p-2 text-white">
+        <span class="navbar-brand ml-2">SportsStore</span>
     </div>
+    <div class="row m-1 p-1">
+        <div id="categories" class="col-3">
+            Put Categories Here
+        </div>
+
+        <div class="col-9">
+            @RenderBody()
+        </div>
+    </div>
+
 </body>
 </html>
 

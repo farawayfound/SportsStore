@@ -6,10 +6,17 @@
 
 @foreach (Product p in Model.Products)
 {
-    <h3><a asp-controller="Home" asp-action="Details" asp-route-id="@p.ProductId"> @p.Name </a></h3>
-    <h4> @p.Price.ToString("c") </h4>
-    //<a href="/Home/Details/?id=@p.ProductId"> Details </a>
-    <hr />
+    <div class ="card card-outline-primary m-1 p-1">
+        <div class="fg-faded p-1">
+            <h4>
+                @p.Name
+                <span class="badge badge-pill badge-primary" style="float: right;">
+                    <small> @p.Price.ToString("C")</small>
+                </span>
+            </h4>
+        </div>
+        <div class="class-text p-1">@p.Description</div>
+    </div>
 }
 
 @*@for (int i = 1; i <= ViewBag.ProductCount / 3; i++)
@@ -23,6 +30,8 @@
     of @Model.PagingInformation.TotalPages
 </h5>
 
+
+@*
 @for (int i = 1; i <= Model.PagingInformation.TotalPages; i++)
 {
     if (i == Model.PagingInformation.CurrentPage)
@@ -35,5 +44,14 @@
             Page @i
         </a>
     }
-    
-}
+    @: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}*@
+
+<div page-model="@Model.PagingInformation" 
+     page-action="Index"
+     page-classes-enabled="true"
+     page-class="btn"
+     page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary"
+     class="btn-group pull-right m-1">
+</div>
