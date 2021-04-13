@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportsStore.Models;
+using SportsStore.Models.ViewModels;
 using System.Linq;
 
 namespace SportsStore.Controllers
@@ -35,11 +36,25 @@ namespace SportsStore.Controllers
 
         public IActionResult Index(int productPage = 1)
         {   //Use home/index/?productPage=2 to display page 2
-            IQueryable<Product> allProducts = _repository.GetAllProducts();
-            IQueryable<Product> someProducts = allProducts.OrderBy(p => p.ProductId)
-                                                          .Skip((productPage - 1) * _pageSize)
-                                                          .Take(_pageSize);
-            return View(someProducts);                                              
+            ProductListViewModel plvm = new ProductListViewModel();
+
+            plvm.PagingInformation = new PagingInfo();
+            plvm.PagingInformation.CurrentPage = productPage;
+            plvm.PagingInformation.ItemsPerPage = _pageSize;
+            plvm.PagingInformation.TotalItems =
+               _repository.GetAllProducts().Count();
+
+            plvm.Products =
+               _repository.GetAllProducts()
+                          .OrderBy(p => p.ProductId)
+                          .Skip((productPage - 1) * _pageSize)
+                          .Take(_pageSize);
+
+            return View(plvm);
+
+
+            //ViewBag.ProductCount = allProducts.Count();
+                                           
         }
 
         public IActionResult Details(int id = 1)
@@ -93,6 +108,25 @@ namespace SportsStore.Controllers
         {
             Product updatedProduct = _repository.UpdateProduct(p);
             return RedirectToAction("Details",new { id = p.ProductId });
+        }
+
+        // D e l e t e
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            Product p = _repository.GetProductById(id);
+            if(p != null)
+            {
+                return View(p);
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public IActionResult Delete2(Product product, int id)
+        {
+            _repository.Delete(id);
+            return RedirectToAction("Index");
         }
     }
 }

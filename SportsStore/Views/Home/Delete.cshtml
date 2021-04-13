@@ -1,0 +1,13 @@
+﻿@model Product
+
+<h3> @Model.Name </h3>
+<p> @Model.Description </p>
+<h4> @Model.Price.ToString("c") </h4>
+<h4> Category: @Model.Category </h4>
+<h1> Are You Sure? </h1>
+<form method="post">
+    <button asp-action="Delete2" asp-route-id="@Model.ProductId"> Delete </button>
+    <button asp-action="Index" formmethod="get">
+        Cancel
+    </button>
+</form>

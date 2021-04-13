@@ -1,10 +1,10 @@
-﻿@model IQueryable<Product>
+﻿@model ProductListViewModel
 
 <h4> Welcome to SportsStore </h4>
 <a asp-action="Add"> Add New Product </a>
 <hr />
 
-@foreach (Product p in Model)
+@foreach (Product p in Model.Products)
 {
     <h3><a asp-controller="Home" asp-action="Details" asp-route-id="@p.ProductId"> @p.Name </a></h3>
     <h4> @p.Price.ToString("c") </h4>
@@ -12,6 +12,28 @@
     <hr />
 }
 
-<a> Last Page</a>
+@*@for (int i = 1; i <= ViewBag.ProductCount / 3; i++)
+    {
+        <a asp-action="Index" asp-route-productPage="@i"> Page @i </a>
+        @: &nbsp; | &nbsp;
+    }*@
 
-<a> Next Page </a>
+<h5>
+    Page @Model.PagingInformation.CurrentPage
+    of @Model.PagingInformation.TotalPages
+</h5>
+
+@for (int i = 1; i <= Model.PagingInformation.TotalPages; i++)
+{
+    if (i == Model.PagingInformation.CurrentPage)
+    {
+        <strong> Page @i</strong>
+    }
+    else
+    {
+        <a asp-controller="Home" asp-action="Index" asp-route-productPage="@i">
+            Page @i
+        </a>
+    }
+    
+}
