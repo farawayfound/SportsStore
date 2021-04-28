@@ -9,8 +9,8 @@ using SportsStore.Models;
 namespace SportsStore.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210407143123_TestData")]
-    partial class TestData
+    [Migration("20210417020209_SeedData")]
+    partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
